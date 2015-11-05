@@ -17,16 +17,29 @@ router.get('/list', (req, res) => {
   // the following in this route:
   //
   //   (1) Grab the user session object.
+  var user = req.session.user
   //   (2) Test that the user session object exists. If not, a redirect
   //       back to the login view is necessary with a proper flash message.
+  if(!user) {
+    req.flash('Session expired');
+    res.redirect('/user/login');
+  }
   //   (3) Test if the user session exists and they are not online. If
   //       the user session exists and they are not online it means the
   //       server has been restarted and their session has expired. If
   //       this is the case you will need to redirect back to login with
   //       a proper flash message (e.g., login expired).
-  //   (4) Test is the user is an admin. If they are not you need to
+  if(user && !online[user]) {
+    req.flash('Session expired');
+    res.redirect('/user/login');
+  }
+    
+  //   (4) Test if the user is an admin. If they are not you need to
   //       redirect back to main with a proper flash message - indicate
   //       that the user needs admin credentials to access this route.
+  
+  //if(user.admin)
+  
   //   (5) If the user is logged in, is online, and is an admin then
   //       you want to retrieve the list of users from the `lib/user.js`
   //       library and render the `user-list` view. The `user-list` view
@@ -36,10 +49,17 @@ router.get('/list', (req, res) => {
   //       user that already exists in our mock database.
   //
   //  You will be graded on each of the above items.
-
   // Replace below with your own implementation.
-  req.flash('main', '/admin/list is not implemented!');
-  res.redirect('/user/main');
+  
+//  req.flash('main', '/admin/list is not implemented!');
+//  res.redirect('/user/main');
+  //res.render('list', {
+  //  title : 'All Users',
+  var list = user.list(function (error, userArray){
+      if(error) req.flash(error);
+      else res.render('user-list', userArray);
+    }
+  });
 });
 
 router.post('/user', (req, res) => {

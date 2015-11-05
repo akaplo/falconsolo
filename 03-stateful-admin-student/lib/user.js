@@ -28,6 +28,7 @@ exports.lookup = (usr, pass, cb) => {
   if (usr in db) {
     var u = db[usr];
     if (pass == u.pass) {
+      console.log("LOGIN!");
       cb(undefined, { name: u.name, admin: u.admin });
     }
     else {
@@ -61,14 +62,11 @@ exports.list = (cb) => {
   //   (1) You correctly copy each of the user objects.
   //   (2) You correctly invoke the callback with the proper results.
   //
-  var userArray = [];
-  for(n in db) {
-    userArray += db[n];
-  }
-  if(copy) {
-    cb(undefined, 
-  }
-  cb(error, );
+  console.log("TITS");
+  var userArray = JSON.parse(JSON.stringify(a));
+  console.log(error);
+  if(error) cb(error, userArray);
+  else cb(undefined, userArray);
 };
 
 exports.add = (u, cb) => {
