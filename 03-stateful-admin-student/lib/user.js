@@ -61,7 +61,14 @@ exports.list = (cb) => {
   //   (1) You correctly copy each of the user objects.
   //   (2) You correctly invoke the callback with the proper results.
   //
-  cb(undefined, []);
+  var userArray = [];
+  for(n in db) {
+    userArray += db[n];
+  }
+  if(copy) {
+    cb(undefined, 
+  }
+  cb(error, );
 };
 
 exports.add = (u, cb) => {
