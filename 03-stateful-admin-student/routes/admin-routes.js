@@ -17,10 +17,11 @@ router.get('/list', (req, res) => {
   // the following in this route:
   //
   //   (1) Grab the user session object.
-  var user = req.session.user
+  var sess = req.session.user;
   //   (2) Test that the user session object exists. If not, a redirect
   //       back to the login view is necessary with a proper flash message.
-  if(!user) {
+  if(!sess) {
+    console.log("UH OH");
     req.flash('Session expired');
     res.redirect('/user/login');
   }
@@ -29,10 +30,14 @@ router.get('/list', (req, res) => {
   //       server has been restarted and their session has expired. If
   //       this is the case you will need to redirect back to login with
   //       a proper flash message (e.g., login expired).
-  if(user && !online[user]) {
+  
+  else if(sess && (online[sess.name] === undefined)) {
+    console.log("UH OH 2");
     req.flash('Session expired');
     res.redirect('/user/login');
   }
+  
+  else{
     
   //   (4) Test if the user is an admin. If they are not you need to
   //       redirect back to main with a proper flash message - indicate
@@ -55,11 +60,17 @@ router.get('/list', (req, res) => {
 //  res.redirect('/user/main');
   //res.render('list', {
   //  title : 'All Users',
-  var list = user.list(function (error, userArray){
+    model.list(function(error, userArray){
       if(error) req.flash(error);
-      else res.render('user-list', userArray);
-    }
+      else
+      //console.log(userArray);
+      res.render('user-list', {
+        message : 'Hi there!',
+        users : userArray
+    });  
   });
+  }
+  
 });
 
 router.post('/user', (req, res) => {

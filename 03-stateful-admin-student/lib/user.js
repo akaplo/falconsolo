@@ -62,11 +62,18 @@ exports.list = (cb) => {
   //   (1) You correctly copy each of the user objects.
   //   (2) You correctly invoke the callback with the proper results.
   //
-  console.log("TITS");
-  var userArray = JSON.parse(JSON.stringify(a));
-  console.log(error);
-  if(error) cb(error, userArray);
-  else cb(undefined, userArray);
+  
+  
+  var userArray = [];
+  for(element in db){
+    console.log(element);
+    userArray.push(db[element]);
+    }
+  console.log(userArray);
+  //if(!userArray) cb("Database access error", userArray);
+  
+  cb(undefined, userArray);
+  //else cb(undefined, userArray);
 };
 
 exports.add = (u, cb) => {
