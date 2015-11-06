@@ -96,6 +96,12 @@ exports.add = (u, cb) => {
   // not allow users with duplicate names. So, you will need to check
   // to make sure that you are given a user name that does not already
   // exist in our mock database.
+  
+  if(db.hasOwnProperty(u.name)){
+     cb("User with this username already exists!", u);
+     return;
+  }
+  
   //
   // If the user has a unique user name then you need to create the
   // new user using the `user` function defined above. You must then
@@ -103,9 +109,15 @@ exports.add = (u, cb) => {
   // provided as an argument to this `add` function. Don't forget to
   // add the new user to the mock database.
   //
+
+  var newUser = user(u.name, u.pass, u.admin);
+  u.uid = newUser.uid;
+  db[u.name] = newUser;
+
   // If everything is successful, you should invoke the callback with
   // an undefined for the error and the original `u` that was provided.
   //
+  cb(undefined, u);
   // Why do we not simply return the user object returned from the
   // `user` function? Think about this one.
   //
@@ -117,5 +129,4 @@ exports.add = (u, cb) => {
   //   (5) You correctly copy the UID to the `u` argument.
   //   (6) You correctly call the callback with the correct user information.
   //
-  cb('could not add user');
 };
