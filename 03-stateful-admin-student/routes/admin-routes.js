@@ -135,7 +135,7 @@ router.post('/user', (req, res) => {
           return;
         }
         else{
-          req.flash('user-list', 'Successfully created new user!.');
+          req.flash('user-list', 'Successfully created new user!');
           res.redirect('/admin/list');
           return;
         }
@@ -143,17 +143,13 @@ router.post('/user', (req, res) => {
       
     }
   }
-  //   (6) If you have received the proper form variables then you must
+  // ^^^^ (6) If you have received the proper form variables then you must
   //       create a new user using the `model.add` function. If an error
   //       message is returned in the callback you should flash that message
   //       to the `list` route above passing it the error message returned
   //       from the `model.add` function and redirect to `list`.
   //       Otherwise, you should flash to `list` that the user has
   //       been added and redirect back to the `list` route.
-  //
-  //  You will be graded on each of the above items.
-
-  // Replace below with your implementation.
 });
 
 module.exports = router;

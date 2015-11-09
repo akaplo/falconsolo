@@ -108,10 +108,6 @@ exports.add = (u, cb) => {
   // copy the generated uid from the new user to the `u` object
   // provided as an argument to this `add` function. Don't forget to
   // add the new user to the mock database.
-  //
-  //var fixAdmin;
-  //if(u.admin === 'yes') fixAdmin = true;
-  //else fixAdmin = false;
   
   var newUser = user(u.name, u.pass, u.admin);
   u.uid = newUser.uid;
