@@ -28,7 +28,6 @@ exports.lookup = (usr, pass, cb) => {
   if (usr in db) {
     var u = db[usr];
     if (pass == u.pass) {
-      console.log("LOGIN!");
       cb(undefined, { name: u.name, admin: u.admin });
     }
     else {
@@ -65,12 +64,13 @@ exports.list = (cb) => {
   
   
   var userArray = [];
-  for(element in db){
-    console.log(element);
-    userArray.push(db[element]);
-    }
+  var dbCopy = JSON.parse(JSON.stringify(db));
+  for(element in dbCopy){    
+    userArray.push(dbCopy[element]);
+  }
   console.log(userArray);
-  //if(!userArray) cb("Database access error", userArray);
+  
+  if(!userArray) cb("Database access error", userArray);
   
   cb(undefined, userArray);
   //else cb(undefined, userArray);
@@ -109,7 +109,10 @@ exports.add = (u, cb) => {
   // provided as an argument to this `add` function. Don't forget to
   // add the new user to the mock database.
   //
-
+  //var fixAdmin;
+  //if(u.admin === 'yes') fixAdmin = true;
+  //else fixAdmin = false;
+  
   var newUser = user(u.name, u.pass, u.admin);
   u.uid = newUser.uid;
   db[u.name] = newUser;

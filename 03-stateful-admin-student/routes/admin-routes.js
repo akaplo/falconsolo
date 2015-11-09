@@ -23,8 +23,8 @@ router.get('/list', (req, res) => {
   var sess = req.session.user;
   //   (2) Test that the user session object exists. If not, a redirect
   //       back to the login view is necessary with a proper flash message.
+    
   if(!sess) {
-    console.log("UH OH");
     req.flash('Session expired');
     res.redirect('/user/login');
   }
@@ -35,7 +35,6 @@ router.get('/list', (req, res) => {
   //       a proper flash message (e.g., login expired).
   
   else if(sess && (online[sess.name] === undefined)) {
-    console.log("UH OH 2");
     req.flash('Session expired');
     res.redirect('/user/login');
   }
@@ -68,7 +67,6 @@ router.get('/list', (req, res) => {
       model.list(function(error, userArray){
       if(error) req.flash(error);
       else
-      //console.log(userArray);
         res.render('user-list', {
           users : userArray
         });   //end render
@@ -120,7 +118,7 @@ router.post('/user', (req, res) => {
   else{
     var form = req.body;
     if(!form.name || !form.pass || !form.admin){
-      req.flash('/admin/list', 'Error receiving your new user information');
+      req.flash('user-list', 'Error receiving new user information');
       res.redirect('/admin/list');
       return;
     }
@@ -128,17 +126,17 @@ router.post('/user', (req, res) => {
       var u = {
         name: form.name,
         pass: form.pass,
-        admin: form.admin
+        admin: form.admin === 'yes' ? true : false
       };
       model.add(u, function(error, newUser){
         if(error) {
-          req.flash('list', error);
-          res.redirect('/admin/list/');
+          req.flash('user-list', error);
+          res.redirect('/admin/list');
           return;
         }
         else{
-          req.flash('list', 'All looks good');
-          res.redirect('list');
+          req.flash('user-list', 'Successfully created new user!.');
+          res.redirect('/admin/list');
           return;
         }
       });
