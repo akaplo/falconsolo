@@ -73,7 +73,6 @@ exports.list = (cb) => {
   if(!userArray) cb("Database access error", userArray);
   
   cb(undefined, userArray);
-  //else cb(undefined, userArray);
 };
 
 exports.add = (u, cb) => {

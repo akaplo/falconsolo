@@ -1,0 +1,12 @@
+{"_id":{"$oid":"564b7747d8561122151b5fb1"},"name":"Horny","dob":{"$date":"1992-03-13T12:47:00.000Z"},"loves":["carrot","papaya"],"weight":600.0,"gender":"m","vampires":63.0}
+{"_id":{"$oid":"564b7747d8561122151b5fb2"},"name":"Aurora","dob":{"$date":"1991-01-24T18:00:00.000Z"},"loves":["carrot","grape"],"weight":450.0,"gender":"f","vampires":43.0}
+{"_id":{"$oid":"564b7747d8561122151b5fb3"},"name":"Unicrom","dob":{"$date":"1973-02-10T03:10:00.000Z"},"loves":["energon","redbull"],"weight":984.0,"gender":"m","vampires":182.0}
+{"_id":{"$oid":"564b7747d8561122151b5fb4"},"name":"Roooooodles","dob":{"$date":"1979-08-18T22:44:00.000Z"},"loves":["apple"],"weight":575.0,"gender":"m","vampires":99.0}
+{"_id":{"$oid":"564b7747d8561122151b5fb5"},"name":"Solnara","dob":{"$date":"1985-07-04T06:01:00.000Z"},"loves":["apple","carrot","chocolate"],"weight":550.0,"gender":"f","vampires":80.0}
+{"_id":{"$oid":"564b7747d8561122151b5fb6"},"name":"Ayna","dob":{"$date":"1998-03-07T13:30:00.000Z"},"loves":["strawberry","lemon"],"weight":733.0,"gender":"f","vampires":40.0}
+{"_id":{"$oid":"564b7747d8561122151b5fb7"},"name":"Kenny","dob":{"$date":"1997-07-01T14:42:00.000Z"},"loves":["grape","lemon"],"weight":690.0,"gender":"m","vampires":39.0}
+{"_id":{"$oid":"564b7748d8561122151b5fb8"},"name":"Raleigh","dob":{"$date":"2005-05-03T04:57:00.000Z"},"loves":["apple","sugar"],"weight":421.0,"gender":"m","vampires":2.0}
+{"_id":{"$oid":"564b775bd8561122151b5fb9"},"name":"Leia","dob":{"$date":"2001-10-08T18:53:00.000Z"},"loves":["apple","watermelon"],"weight":601.0,"gender":"f","vampires":33.0}
+{"_id":{"$oid":"564b775bd8561122151b5fba"},"name":"Pilot","dob":{"$date":"1997-03-01T10:03:00.000Z"},"loves":["apple","watermelon"],"weight":650.0,"gender":"m","vampires":54.0}
+{"_id":{"$oid":"564b775bd8561122151b5fbb"},"name":"Nimue","dob":{"$date":"1999-12-20T21:15:00.000Z"},"loves":["grape","carrot"],"weight":540.0,"gender":"f"}
+{"_id":{"$oid":"564b775bd8561122151b5fbc"},"name":"Dunx","dob":{"$date":"1976-07-18T22:18:00.000Z"},"loves":["grape","watermelon"],"weight":704.0,"gender":"m","vampires":165.0}

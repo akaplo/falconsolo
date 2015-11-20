@@ -65,9 +65,8 @@ router.get('/list', (req, res) => {
   
     else{
       model.list(function(error, userArray){
-      if(error) req.flash(error);
-      else
         res.render('user-list', {
+          message : error || "Success",
           users : userArray
         });   //end render
       }); //end list
@@ -90,25 +89,22 @@ router.post('/user', (req, res) => {
     if(!sess){
       req.flash('main', 'Session expired.');
       res.redirect('user/login/');
-      return;
     }
   //   (3) Test if the user session exists and they are not online. If
   //       the user session exists and they are not online it means the
   //       server has been restarted and their session has expired. If
   //       this is the case you will need to redirect back to login with
   //       a proper flash message (e.g., login expired).
-  else if(sess && (online[sess.name] == undefined)){
-      req.flash('main', 'Login expired.');
+  else if(sess && !online[sess.name]){
+      req.flash('login', 'Login expired.');
       res.redirect('user/login/');
-    return;
   }
   //   (4) Test is the user is an admin. If they are not you need to
   //       redirect back to main with a proper flash message - indicate
   //       that the user needs admin credentials to access this route.
   else if(!sess.admin){
-    req.flash('main', 'Privileged operation, sorry.');
+      req.flash('main', 'Privileged operation, sorry.');
       res.redirect('/user/main/');
-    return;
   }
   //   (5) If the user is logged in, they are online, and they are an
   //       admin then you need to grab the form variables from the
@@ -120,28 +116,22 @@ router.post('/user', (req, res) => {
     if(!form.name || !form.pass || !form.admin){
       req.flash('user-list', 'Error receiving new user information');
       res.redirect('/admin/list');
-      return;
     }
-    else{
-      var u = {
-        name: form.name,
-        pass: form.pass,
-        admin: form.admin === 'yes' ? true : false
-      };
-      model.add(u, function(error, newUser){
-        if(error) {
-          req.flash('user-list', error);
-          res.redirect('/admin/list');
-          return;
-        }
-        else{
-          req.flash('user-list', 'Successfully created new user!');
-          res.redirect('/admin/list');
-          return;
-        }
-      });
-      
-    }
+    var u = {
+      name: form.name,
+      pass: form.pass,
+      admin: form.admin === 'yes' ? true : false
+    };
+    model.add(u, function(error, user){
+      if(error) {
+        req.flash('user-list', error);
+        res.redirect('/admin/list');
+      }
+      else{
+        req.flash('user-list', 'Success!');
+        res.redirect("/admin/list");
+      }
+    });
   }
   // ^^^^ (6) If you have received the proper form variables then you must
   //       create a new user using the `model.add` function. If an error
