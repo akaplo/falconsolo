@@ -1,0 +1,3 @@
+To connect using the mongo shell:
+
+mongo ds049130.mongolab.com:49130/unicorns -u instructor -p instructor
